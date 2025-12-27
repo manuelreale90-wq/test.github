@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bomberjacke - Jetzt 46% reduziert!</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: white; color: #333; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    header { background: white; padding: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; }
+    nav { display: flex; justify-content: space-between; align-items: center; }
+    nav a { color: #333; text-decoration: none; font-weight: 500; }
+    .hero { text-align: center; padding: 60px 0; background: linear-gradient(135deg, #f8f9fa 0%, white 100%); }
+    .product-img { max-width: 100%; height: 500px; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+    .price-old { font-size: 1.2em; color: #999; text-decoration: line-through; }
+    .price-new { font-size: 2.5em; font-weight: bold; color: #28a745; margin: 10px 0; }
+    .sale-badge { background: #dc3545; color: white; padding: 8px 16px; border-radius: 50px; font-weight: bold; display: inline-block; margin-bottom: 20px; }
+    .btn { background: black; color: white; border: none; padding: 18px 40px; font-size: 1.1em; font-weight: bold; border-radius: 50px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin: 10px; min-width: 200px; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 60px 0; }
+    .feature { text-align: center; padding: 30px; background: #f8f9fa; border-radius: 20px; }
+    .offer { background: #d4edda; padding: 40px; border-radius: 20px; margin: 40px 0; text-align: center; }
+    .quantity { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0; }
+    input[type="number"] { width: 80px; padding: 10px; border: 2px solid #ddd; border-radius: 10px; text-align: center; font-size: 1.2em; }
+    footer { background: #f8f9fa; padding: 40px 0; text-align: center; color: #666; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="#">Manuel's Shop</a>
+      <a href="#">Warenkorb (0)</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <img src="https://images.unsplash.com/photo-1542272604-787c3835535a?w=1200&h=800&fit=crop" alt="Model trägt schwarze Bomberjacke" class="product-img">
+      <div class="sale-badge">LIMITIERT: 46% SALE!</div>
+      <h1>Premium Bomberjacke</h1>
+      <p>Robuste, stilvolle Jacke für Herbst/Winter – perfekt für Streetwear.</p>
+      <div class="price-old">€85,99</div>
+      <div class="price-new">€45,99</div>
+      <div class="quantity">
+        Menge: <input type="number" value="1" min="1" max="10">
+      </div>
+      <button class="btn">🛒 In den Warenkorb</button>
+      <button class="btn">❤️ Zur Wunschliste</button>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2>Warum diese Bomberjacke?</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>Hohe Qualität</h3>
+          <p>Wasserdichtes Nylon, gefüttert – hält ewig.</p>
+        </div>
+        <div class="feature">
+          <h3>Perfekter Fit</h3>
+          <p>Oversized-Schnitt für Komfort, viele Größen.</p>
+        </div>
+        <div class="feature">
+          <h3>Schneller Versand</h3>
+          <p>Versandkostenfrei ab 50€, 1-2 Tage Lieferzeit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="offer">
+    <div class="container">
+      <h2>🎁 Exklusive Angebote</h2>
+      <ul style="list-style: none; font-size: 1.2em;">
+        <li>✅ Versandkostenfrei</li>
+        <li>✅ 30 Tage Rückgaberecht</li>
+        <li>✅ Kostenlose Größenberatung</li>
+        <li>⏰ Sale endet in 48h!</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Manuel's Shop. Alle Rechte vorbehalten. | Impressum | Datenschutz</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.btn').onclick = () => alert('Zum Warenkorb hinzugefügt! (Demo)');
+  </script>
+</body>
+</html>
