@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weltuhr</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; font-family: system-ui, Arial, sans-serif; background: #0b1220; color: #e7eefc; }
+    header { padding: 18px 16px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    h1 { margin: 0; font-size: 20px; letter-spacing: .2px; }
+    .sub { margin-top: 6px; opacity: .75; font-size: 13px; }
+    main { padding: 16px; max-width: 900px; margin: 0 auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 14px 14px 12px;
+      backdrop-filter: blur(6px);
+    }
+    .city { font-weight: 700; font-size: 16px; display: flex; justify-content: space-between; gap: 10px; }
+    .tz { opacity: .65; font-weight: 500; font-size: 12px; }
+    .time { margin-top: 10px; font-size: 28px; font-weight: 800; letter-spacing: .3px; }
+    .date { margin-top: 6px; opacity: .75; font-size: 13px; }
+    footer { padding: 14px 16px; opacity: .65; font-size: 12px; text-align: center; }
+    button {
+      margin-top: 12px;
+      background: #2b6cff;
+      border: 0;
+      color: white;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:active { transform: scale(.99); }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Weltuhr</h1>
+    <div class="sub">Zeigt die aktuelle Zeit in mehreren Städten – aktualisiert jede Sekunde.</div>
+  </header>
+
+  <main>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer>
+    Tipp: Du kannst unten Städte hinzufügen/entfernen, indem du im Code die Liste änderst.
+  </footer>
+
+  <script>
+    // IANA-Zeitzonen (Format Region/Stadt) für Intl.DateTimeFormat [web:99]
+    const CITIES = [
+      { name: "Stadthagen", tz: Intl.DateTimeFormat().resolvedOptions().timeZone },
+      { name: "London",     tz: "Europe/London" },
+      { name: "Tokio",      tz: "Asia/Tokyo" },
+      { name: "New York",   tz: "America/New_York" },
+      { name: "Los Angeles",tz: "America/Los_Angeles" },
+      { name: "Dubai",      tz: "Asia/Dubai" },
+      { name: "Sydney",     tz: "Australia/Sydney" }
+    ];
+
+    const grid = document.getElementById("grid");
+
+    function makeCard(city) {
+      const card = document.createElement("section");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="city">
+          <span>${city.name}</span>
+          <span class="tz">${city.tz}</span>
+        </div>
+        <div class="time" id="t-${cssSafe(city.tz)}">--:--:--</div>
+        <div class="date" id="d-${cssSafe(city.tz)}">----</div>
+      `;
+      return card;
+    }
+
+    function cssSafe(s) {
+      return s.replaceAll("/", "_").replaceAll(" ", "_");
+    }
+
+    function formatTime(tz) {
+      return new Intl.DateTimeFormat("de-DE", {
+        timeZone: tz,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      }).format(new Date());
+    }
+
+    function formatDate(tz) {
+      return new Intl.DateTimeFormat("de-DE", {
+        timeZone: tz,
+        weekday: "short",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).format(new Date());
+    }
+
+    function render() {
+      grid.innerHTML = "";
+      CITIES.forEach(c => grid.appendChild(makeCard(c)));
+    }
+
+    function tick() {
+      CITIES.forEach(c => {
+        const tEl = document.getElementById(`t-${cssSafe(c.tz)}`);
+        const dEl = document.getElementById(`d-${cssSafe(c.tz)}`);
+        if (tEl) tEl.textContent = formatTime(c.tz);
+        if (dEl) dEl.textContent = formatDate(c.tz);
+      });
+    }
+
+    render();
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
